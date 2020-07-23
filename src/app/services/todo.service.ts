@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { Todo } from '../models/Todo';
 import { Observable } from 'rxjs';
+import { TouchSequence } from 'selenium-webdriver';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,5 +29,11 @@ export class TodoService {
   toggleCompleted(todo: Todo): Observable<any> {
     const url = `${this.todosUrl}/${todo.id}`;
     return this.http.put(url, todo, httpOptions);
+  }
+
+  // DELETE TODO
+  deleteTodo(todo: Todo): Observable<Todo> {
+    const url = `${this.todosUrl}/${todo.id}`;
+    return this.http.delete<Todo>(url, httpOptions);
   }
 }
